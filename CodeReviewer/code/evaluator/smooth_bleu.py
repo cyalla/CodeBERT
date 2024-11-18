@@ -167,7 +167,8 @@ def bleu_fromstr(predictions, golds, rmstop=True):
     golds = [" ".join(nltk.wordpunct_tokenize(g)) for g in golds]
     if rmstop:
         pypath = os.path.dirname(os.path.realpath(__file__))
-        stopwords = open(os.path.join(pypath, "stopwords.txt")).readlines()
+        parpath = os.path.join(pypath, os.pardir)
+        stopwords = open(os.path.join(parpath, "stopwords.txt")).readlines()
         stopwords = [stopword.strip() for stopword in stopwords]
         golds = [" ".join([word for word in ref.split() if word not in stopwords]) for ref in golds]
         predictions = [" ".join([word for word in hyp.split() if word not in stopwords]) for hyp in predictions]

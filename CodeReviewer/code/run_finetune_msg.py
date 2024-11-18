@@ -68,7 +68,7 @@ def eval_bleu_epoch(args, eval_dataloader, model, tokenizer):
                             use_cache=True,
                             num_beams=args.beam_size,
                             early_stopping=True,
-                            max_length=args.max_target_length)
+                            max_new_tokens=args.max_target_length)
         top_preds = list(preds.cpu().numpy())
         pred_ids.extend(top_preds)
     # [1:] to remove beginning '<msg>'

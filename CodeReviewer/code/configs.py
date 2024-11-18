@@ -20,7 +20,7 @@ def add_args(parser):
         "--model_type",
         default="codet5",
         type=str,
-        choices=["roberta", "t5", "bart", "codet5", "scratch"],
+        choices=["roberta", "qwen2.5", "t5", "bart", "codet5", "scratch"],
     )
     parser.add_argument("--add_lang_ids", action="store_true")
     parser.add_argument("--from_scratch", action="store_true")
@@ -33,7 +33,7 @@ def add_args(parser):
         "--output_dir",
         default=None,
         type=str,
-        required=False,
+        required=True,
         help="The output directory where the model predictions and checkpoints will be written.",
     )
     parser.add_argument(

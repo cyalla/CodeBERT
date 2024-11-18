@@ -76,10 +76,20 @@ def eval_bleu_epoch(args, eval_dataloader, model, tokenizer):
     golds = golds[:len(pred_nls)]
     for i in range(len(golds)):
         pred_nls[i], golds[i] = RefineDataset.process_pred_gold(pred_nls[i], golds[i])
-    with open(os.path.join(args.model_name_or_path, "preds.txt"), "w", encoding="utf-8") as f:
+    # Ensure the output directory exists
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
+       # Ensure the output directory exists
+    if not os.path.exists(args.output_dir):
+        os.makedirs(args.output_dir)
+
+    # Write predictions to the output directory
+    with open(os.path.join(args.output_dir, "preds.txt"), "w", encoding="utf-8") as f:
         for pred in pred_nls:
             f.write(pred.strip() + "\n")
-    with open(os.path.join(args.model_name_or_path, "golds.txt"), "w", encoding="utf-8") as f:
+
+    # Write gold references to the output directory
+    with open(os.path.join(args.output_dir, "golds.txt"), "w", encoding="utf-8") as f:
         for gold in golds:
             f.write(gold.strip() + "\n")
     em = 0
